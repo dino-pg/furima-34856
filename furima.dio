@@ -1,6 +1,6 @@
 <mxfile>
     <diagram id="7BaUA39szsErOHxCn9qo" name="ページ1">
-        <mxGraphModel dx="713" dy="657" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="713" dy="571" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -37,7 +37,7 @@
                 <mxCell id="31" value="shipping_addressテーブル" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
                     <mxGeometry x="410" y="419" width="250" height="141" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="発送先住所　shipping_address&#10;郵便番号　postal code&#10;都道府県　prefectures&#10;市区町村　minicipality&#10;番地　address&#10;電話番号　phone_number&#10;user_id" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="31" vertex="1">
+                <mxCell id="32" value="発送先住所　shipping_address&#10;郵便番号　postal_code&#10;都道府県　prefectures&#10;市区町村　municipality&#10;番地　address&#10;電話番号　phone_number&#10;user_id" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="31" vertex="1">
                     <mxGeometry y="30" width="250" height="111" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmandOne;startArrow=ERmandOne;entryX=1;entryY=0.605;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.153;exitY=-0.008;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="31" target="3" edge="1">
