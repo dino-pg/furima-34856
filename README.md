@@ -28,17 +28,19 @@ has_many :buys
 | area_id               | integer    | null: false                    |
 | days_to_ship_id       | integer    | null: false                    |
 | price                 | integer    | null: false                    |
-| user_id               | references | foreign_key :true              |
+| user                  | references | foreign_key :true              |
 
 ### Association
 belongs_to :user
 has_one :buy
 
-# buyテーブル
+# buysテーブル
 |Column                 |Type        |Options            |
 |-----------------------|------------|-------------------|
 | buy_goods_name_id     | references | foreign_key :true |
 | buy_user_id           | references | foreign_key :true |
+| user                  | references | foreign_key :true |
+| item                  | references | foreign_key :true |
 
 ### Association
 belongs_to :user
@@ -54,7 +56,7 @@ has_one :shipping_addresses
 | address               | string     | null: false         |
 | phone_number          | string     | null: false         |
 | building_name         | string     |                     |
-| buy_id                | references | foreign_key :true   |
+| buy                   | references | foreign_key :true   |
 
 ### Association
 belongs_to :buy
