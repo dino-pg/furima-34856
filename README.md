@@ -2,7 +2,7 @@
 
 # usersテーブル
 |Column                 |Type    |Options                    |
-|-----------------------|--------|-------------              | 
+|-----------------------|--------|-------------------------- |
 | nickname              | string | null: false               |
 | email                 | string | null: false, unique: true |
 | encrypted_password    | string | null: false               |
@@ -37,18 +37,16 @@ has_one :buy
 # buysテーブル
 |Column                 |Type        |Options            |
 |-----------------------|------------|-------------------|
-| buy_goods_name_id     | references | foreign_key :true |
-| buy_user_id           | references | foreign_key :true |
 | user                  | references | foreign_key :true |
 | item                  | references | foreign_key :true |
 
 ### Association
 belongs_to :user
 belongs_to :item
-has_one :shipping_addresses
+has_one :shipping_address
 
 # shipping_addressテーブル
-|Column                 |Type      |Options      |
+|Column                 |Type        |Options              |
 |-----------------------|----------- |---------------------|
 | postal_code           | string     | null: false         |
 | prefectures_id        | integer    | null: false         |
