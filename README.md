@@ -18,42 +18,43 @@ has_many :buys
 
 
 # itemsテーブル
-|Column                 |Type     |Options      |
-|-----------------------|---------|-------------|
-| item_name             | string  | null: false |
-| item_description      | text    | null: false |
-| condition_id          | integer | null: false |
-| category_id           | integer | null: false |
-| charge_id             | integer | null: false |
-| area_id               | integer | null: false |
-| days_to_ship_id       | integer | null: false |
-| price                 | integer | null: false |
-| user_id               | integer | null: false |
+|Column                 |Type        |Options                         |
+|-----------------------|----------- |------------------------------- |
+| item_name             | string     | null: false                    |
+| item_description      | text       | null: false                    |
+| condition_id          | integer    | null: false                    |
+| category_id           | integer    | null: false                    |
+| charge_id             | integer    | null: false                    |
+| area_id               | integer    | null: false                    |
+| days_to_ship_id       | integer    | null: false                    |
+| price                 | integer    | null: false                    |
+| user_id               | references | foreign_key :true              |
 
 ### Association
 belongs_to :user
 has_one :buy
 
 # buyテーブル
-|Column                 |Type     |Options      |
-|-----------------------|---------|-------------|
-| buy_goods_name        | string  | null: false |
-| buy_user              | string  | null: false |
+|Column                 |Type        |Options            |
+|-----------------------|------------|-------------------|
+| buy_goods_name_id     | references | foreign_key :true |
+| buy_user_id           | references | foreign_key :true |
 
 ### Association
 belongs_to :user
 belongs_to :item
+has_one :shipping_addresses
 
 # shipping_addressテーブル
 |Column                 |Type      |Options      |
-|-----------------------|----------|-------------|
-| postal_code           | integer  | null: false |
-| prefectures_id        | integer  | null: false |
-| municipality          | string   | null: false |
-| address               | string   | null: false |
-| phone_number          | string   | null: false |
-| building_name         | string   |             |
-| buy_id                | integer  | null: false |
+|-----------------------|----------- |---------------------|
+| postal_code           | string     | null: false         |
+| prefectures_id        | integer    | null: false         |
+| municipality          | string     | null: false         |
+| address               | string     | null: false         |
+| phone_number          | string     | null: false         |
+| building_name         | string     |                     |
+| buy_id                | references | foreign_key :true   |
 
 ### Association
 belongs_to :buy
