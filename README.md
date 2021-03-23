@@ -1,60 +1,58 @@
 ## テーブル名
 
 # usersテーブル
-|Column                 |Type    |Options      |
-|-----------------------|--------|-------------|
-| nickname              | string | null: fales |
-| email                 | string | null: fales |
-| password              | string | hull: fales |
-| confirmation_password | string | null: fales |
-| family_name           | string | nill: fales |
-| first_name            | string | nill: fales |
-| kana_family_name      | string | nill: fales |
-| kana_first_name       | string | nill: fales |
-| birthday              | date   | nill: fales |
+|Column                 |Type    |Options       |
+|-----------------------|--------|------------- |
+| nickname              | string | null: false  |
+| email                 | string | unique: true |
+| encrypted_password    | string | hull: false  |
+| family_name           | string | nill: false  |
+| first_name            | string | nill: false  |
+| kana_family_name      | string | nill: false  |
+| kana_first_name       | string | nill: false  |
+| birthday              | date   | nill: false  |
 
 ### Association
 has_many :items
-belongs_to :buy
+has_many :buy
 belongs_to :shipping_address
 
 
 # itemsテーブル
 |Column                 |Type     |Options      |
 |-----------------------|---------|-------------|
-| image                 | string  | null: fales |
-| item_name             | string  | null: fales |
-| item_description      | text    | null: fales |
-| item_condition        | string  | null: fales |
-| category_name         | string  | null: fales |
-| shipping_charges      | string  | null: fales |
-| shipping_area         | string  | null: fales |
-| days_to_ship          | string  | null: fales |
-| price                 | integer | null: fales |
+| item_name             | string  | null: false |
+| item_description      | text    | null: false |
+| condition_id          | string  | null: false |
+| category_id           | string  | null: false |
+| charge_id             | string  | null: false |
+| area_id               | string  | null: false |
+| days_to_ship          | string  | null: false |
+| price                 | integer | null: false |
 
 ### Association
 belongs_to :users
-belongs_to :buy
+has_many :buy
 
 # buyテーブル
 |Column                 |Type     |Options      |
 |-----------------------|---------|-------------|
-| buy_family_name       | string  | null: fales |
-| buy_first_name        | string  | null: fales |
+| buy_goods_name        | string  | null: false |
+| buy_user              | string  | null: false |
 
 ### Association
 belongs_to :users
-has_many :items
+belongs_to :items
 
 # shipping_addressテーブル
 |Column                 |Type      |Options      |
 |-----------------------|----------|-------------|
-| shipping_address      | string   | null: fales |
-| postal_code           | string   | null: fales |
-| prefectures           | string   | null: fales |
-| municipality          | string   | null: fales |
-| address               | string   | null: fales |
-| phone_number          | integer  | null: fales |
+| postal_code           | string   | null: false |
+| prefectures_id        | string   | null: false |
+| municipality          | string   | null: false |
+| address               | string   | null: false |
+| phone_number          | string   | null: false |
+| building_name         | string   | null: false |
 
 ### Association
 belongs_to :users
