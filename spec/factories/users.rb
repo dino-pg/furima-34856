@@ -8,3 +8,5 @@ FactoryBot.define do
     kana_family_name {Faker::Name.initials}
     kana_first_name {Faker::Name.initials}
     birthday {Faker::Date.birthday}
+  end
+end
