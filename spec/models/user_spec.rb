@@ -7,9 +7,9 @@ RSpec.describe User, type: :model do
     end
 
     describe 'ユーザー新規登録' do
-    it '全ての項目の入力が存在すれば登録できること' do
-      expect(@user).to be_valid
-    end
+      it '全ての項目の入力が存在すれば登録できること' do
+        expect(@user).to be_valid
+      end
 
       it 'nicknameが空だと登録できないこと' do
         @user.nickname = ''
@@ -19,23 +19,23 @@ RSpec.describe User, type: :model do
     end
 
     it 'emailが空だと登録できないこと' do
-    @user.email = ''
-    @user.valid?
-    expect(@user.errors.full_messages).to include("Email can't be blank")
+      @user.email = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email can't be blank")
     end
 
     it 'emailが一意性であること' do
-    @user.save
-    another_user = FactoryBot.build(:user)
-    another_user.email = @user.email
-    another_user.valid?
-    expect(another_user.errors.full_messages).to include('Email has already been taken')
+      @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
-  
+
     it 'emailに@を含む必要があること' do
-      @user.email = "abcmail.com"
+      @user.email = 'abcmail.com'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email is invalid")
+      expect(@user.errors.full_messages).to include('Email is invalid')
     end
 
     it 'passwordが空ではないこと' do
@@ -44,7 +44,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    it 'passwordは6文字以上での入力が必須であること'do
+    it 'passwordは6文字以上での入力が必須であること' do
       @user.password = '123456'
       @user.password_confirmation = '123456'
       expect(@user).to be_valid
@@ -57,16 +57,15 @@ RSpec.describe User, type: :model do
     end
 
     it 'passwordとpassword（確認用）は、値の一致が必須であること' do
-    @user.password_confirmation = ''
-    @user.valid?
-    expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      @user.password_confirmation = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
 
-
     it '苗字が空だと登録できないこと' do
-    @user.first_name = '山田'
-    @user.valid?
-    expect(@user).to be_valid
+      @user.first_name = '山田'
+      @user.valid?
+      expect(@user).to be_valid
     end
 
     it '名前が空だと登録できないこと' do
@@ -81,28 +80,10 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
-
     it '生年月日が必須であること' do
-    @user.birthday = ''
-    @user.valid?
-    expect(@user.errors.full_messages).to include("Birthday can't be blank")
-
+      @user.birthday = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
 end
-  #   it 'ログアウト状態では、ヘッダーに新規登録/ログインボタンが表示されること'
-
-  #   end
-
-  #   it 'ログイン状態では、ヘッダーにユーザーのニックネーム/ログアウトボタンが表示されること'
-
-  #   end
-
-  #   it 'ヘッダーの新規登録/ログインボタンをクリックすることで、各ページに遷移できること'
-
-  #   end
-
-  #   it 'ヘッダーのログアウトボタンをクリックすることで、ログアウトができること'
-
-  #   end
-  # end
