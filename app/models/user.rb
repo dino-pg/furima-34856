@@ -7,14 +7,20 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :buys
 
+  
   with_options presence: true do
   validates :nickname
   validates :email
-  validates :encrypted_password, length: { minimum: 6 }
-  validates :family_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-  validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-  validates :kana_family_name, format: { with: /\A[ァ-ヶー－]+\z/ }
-  validates :kana_first_name, format: { with: /\A[ァ-ヶー－]+\z/ }
   validates :birthday
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX
+  with_options format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ } do
+  validates :family_name
+  validates :first_name
   end
+  with_options format: { with: /\A[ァ-ヶー－]+\z/ } do
+  validates :kana_family_name
+  validates :kana_first_name
+  end
+end
 end
