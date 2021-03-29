@@ -11,44 +11,6 @@ RSpec.describe User, type: :model do
         it '全ての項目の入力が存在すれば登録できること' do
           expect(@user).to be_valid
         end
-
-        it 'emailが一意性であること' do
-          @user.save
-          another_user = FactoryBot.build(:user)
-          another_user.email = @user.email
-          another_user.valid?
-          expect(another_user.errors.full_messages).to include('Email has already been taken')
-        end
-
-        it 'passwordは6文字以上での入力が必須であること' do
-          @user.password = '123456'
-          @user.password_confirmation = '123456'
-          expect(@user.errors.full_messages).to include
-        end
-
-        it 'emailに@を含む必要があること' do
-          @user.email = 'abcmail.com'
-          @user.valid?
-          expect(@user.errors.full_messages).to include('Email is invalid')
-        end
-
-        it 'passwordが半角英数字混合での入力が必須であること' do
-          @user.password = 'aaaaaaa'
-          @user.valid?
-          expect(@user.errors.full_messages).to include('Password is invalid')
-        end
-
-        it 'passwordとpassword（確認用）は、値の一致が必須であること' do
-          @user.password_confirmation = ''
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-        end
-
-        it '生年月日が必須であること' do
-          @user.birthday = ''
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Birthday can't be blank")
-        end
       end
 
       context '異常系' do
@@ -64,10 +26,30 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Email can't be blank")
         end
 
+        it 'emailが一意性であること' do
+          @user.save
+          another_user = FactoryBot.build(:user)
+          another_user.email = @user.email
+          another_user.valid?
+          expect(another_user.errors.full_messages).to include('Email has already been taken')
+        end
+
+        it 'emailに@を含む必要があること' do
+          @user.email = 'abcmail.com'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Email is invalid')
+        end
+
         it 'passwordが空ではないこと' do
           @user.password = ''
           @user.valid?
           expect(@user.errors.full_messages).to include("Password can't be blank")
+        end
+
+        it 'passwordは6文字以上での入力が必須であること' do
+          @user.password = '123456'
+          @user.password_confirmation = '123456'
+          expect(@user.errors.full_messages).to include
         end
 
         it 'passwordが5文字以下では登録出来ないこと' do
@@ -86,6 +68,18 @@ RSpec.describe User, type: :model do
           @user.password = 'aaaaaa'
           @user.valid?
           expect(@user.errors.full_messages).to include('Password is invalid')
+        end
+
+        it 'passwordが半角英数字混合での入力が必須であること' do
+          @user.password = 'aaaaaaa'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Password is invalid')
+        end
+
+        it 'passwordとpassword（確認用）は、値の一致が必須であること' do
+          @user.password_confirmation = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
 
         it '苗字が空だと登録できないこと' do
@@ -110,6 +104,12 @@ RSpec.describe User, type: :model do
           @user.family_name = ''
           @user.valid?
           expect(@user.errors.full_messages).to include("Family name can't be blank")
+        end
+
+        it '生年月日が必須であること' do
+          @user.birthday = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Birthday can't be blank")
         end
       end
     end
