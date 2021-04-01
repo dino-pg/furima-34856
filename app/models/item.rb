@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :days_to_ship
   has_one_attached :image
   belongs_to :user
-  has_one :buy
+  # has_one :buy
 
   
   with_options presence: true do
@@ -19,6 +19,6 @@ class Item < ApplicationRecord
     validates :area_id, numericality: { other_than: 1 }
     validates :days_to_ship_id, numericality: { other_than: 1 }
     validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-    validates :user
+    validates :image
   end
 end

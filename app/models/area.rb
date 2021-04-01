@@ -19,6 +19,6 @@ class Area < ActiveHash::Base
     {id: 47, name: '鹿児島県'}, {id: 48, name: '沖縄県'}
   ]
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :items
+  include ActiveHash::Associations
+  has_many :items
   end
