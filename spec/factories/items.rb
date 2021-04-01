@@ -8,7 +8,6 @@ FactoryBot.define do
     area_id {2}
     days_to_ship_id {2}
     price {300}
-    image {}
     association :user
 
     after(:build) do |message|
