@@ -27,49 +27,49 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Item description can't be blank")
       end
       it 'カテゴリーが未選択だと出品できない' do
-        @item.category_id = ""
+        @item.category_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category is not a number")
+        expect(@item.errors.full_messages).to include('Category is not a number')
       end
       it '商品の状態が未選択だと出品できない' do
-        @item.condition_id = ""
+        @item.condition_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition is not a number")
+        expect(@item.errors.full_messages).to include('Condition is not a number')
       end
       it '配送料の負担が未選択だと出品できない' do
-        @item.charge_id = ""
+        @item.charge_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Charge is not a number")
+        expect(@item.errors.full_messages).to include('Charge is not a number')
       end
       it '配送元の地域が未選択だと出品できない' do
-        @item.area_id = ""
+        @item.area_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area is not a number")
+        expect(@item.errors.full_messages).to include('Area is not a number')
       end
       it '配送までの日数が未選択だと出品できない' do
-        @item.days_to_ship_id = ""
+        @item.days_to_ship_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Days to ship is not a number")
+        expect(@item.errors.full_messages).to include('Days to ship is not a number')
       end
       it '販売価格が空だと出品できない' do
-        @item.price = ""
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceが全角数字だと出品できない' do
-        @item.price = "２０００"
+        @item.price = '２０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '値段が半角英数混合では登録できないこと' do
-        @item.price = "300aaa"
+        @item.price = '300aaa'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '値段が半角英語だけでは登録できないこと' do
-        @item.price = "aaabbbccc"
+        @item.price = 'aaabbbccc'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '値段が299円以下の場合は登録できない' do
         @item.price = 299
