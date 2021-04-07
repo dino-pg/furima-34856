@@ -2,16 +2,21 @@ class BuysController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @buy = Buy.new
+    @item = Item.find(params[:item_id])
+    @buy_shipping_address = BuyShippingAddress.new
+  end
+
+  def new
+    @buy_shipping_address = BuyShippingAddress.new
   end
 
   def create
-    @buy = Buy.new(buy_params)
-    if @buy.valid?
-      @buy.save
-      return redirect_to root_path
+    @buy_shipping_address = BuyShippingAddress.new(buy_params)
+    if @buy_shipping_address.valid?
+      @buy_shipping_address.save
+      redirect_to root_path
     else
-      render 'index'
+      render 'new'
     end
   end
 
