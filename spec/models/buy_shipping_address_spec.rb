@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe BuyShippingAddress, type: :model do
   before do
+    # @user = FactoryBot.create(:item)
+    # @item = FactoryBot.create(:user)
     @buy_shipping_address = FactoryBot.build(:buy_shipping_address)
   end
 

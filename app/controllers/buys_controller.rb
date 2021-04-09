@@ -9,10 +9,6 @@ class BuysController < ApplicationController
     end
   end
 
-  def new
-    @buy_shipping_address = BuyShippingAddress.new
-  end
-
   def create
     @buy_shipping_address = BuyShippingAddress.new(shippingaddresses_params)
     @item = Item.find(params[:item_id])

@@ -133,7 +133,7 @@
           <%= image_tag item.image, class: "item-img" if item.image.attached? %>
           <% end %>
           
-          <% if item.user_id.present? %>
+          <% if item.buy.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
