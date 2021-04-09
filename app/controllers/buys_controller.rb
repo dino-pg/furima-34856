@@ -1,9 +1,12 @@
 class BuysController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
 
   def index
     @item = Item.find(params[:item_id])
     @buy_shipping_address = BuyShippingAddress.new
+    if current_user == @item.user
+      redirect_to root_path
+    end
   end
 
   def new
@@ -16,11 +19,15 @@ class BuysController < ApplicationController
     if @buy_shipping_address.valid?
       pay_item
       @buy_shipping_address.save
-      redirect_to root_path
+      redirect_to root_path 
+    unless 
+      current_user.id == @item.user_id  
+      end
     else
       render :index
     end
   end
+
 
   private
 
