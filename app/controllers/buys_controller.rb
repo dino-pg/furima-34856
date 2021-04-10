@@ -1,12 +1,11 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
   before_action :set_buy, only: [:index, :create]
+  before_action :redirect, only: [:index]
+  before_action :item_user, only: [:index, :create]
 
   def index
     @buy_shipping_address = BuyShippingAddress.new
-    if current_user == @item.user
-      redirect_to root_path
-    end
   end
 
   def create
@@ -15,9 +14,6 @@ class BuysController < ApplicationController
       pay_item
       @buy_shipping_address.save
       redirect_to root_path 
-    unless 
-      current_user.id == @item.user_id  
-      end
     else
       render :index
     end
@@ -43,4 +39,16 @@ class BuysController < ApplicationController
   def set_buy
     @item = Item.find(params[:item_id])
   end
+
+  def redirect
+    @item = Buy.find(params[:item_id])
+    redirect_to root_path
+  end
+
+  def item_user
+     if current_user == @item.user
+    redirect_to root_path
+  end
+end
+
 end
