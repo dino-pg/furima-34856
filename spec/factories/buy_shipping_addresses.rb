@@ -8,5 +8,6 @@ FactoryBot.define do
     user_id { Faker::Number }
     item_id { Faker::Number }
     token { 'abcdefg' }
+    building_name { '山田ビル' }
   end
 end

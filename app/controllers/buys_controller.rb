@@ -1,8 +1,8 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_buy, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @buy_shipping_address = BuyShippingAddress.new
     if current_user == @item.user
       redirect_to root_path
@@ -11,7 +11,6 @@ class BuysController < ApplicationController
 
   def create
     @buy_shipping_address = BuyShippingAddress.new(shippingaddresses_params)
-    @item = Item.find(params[:item_id])
     if @buy_shipping_address.valid?
       pay_item
       @buy_shipping_address.save
@@ -24,12 +23,7 @@ class BuysController < ApplicationController
     end
   end
 
-
   private
-
-  # def buy_params
-  #   params.require(:buy_shipping_address).permit(:user_id, :item_id).merge(token: params[:token])
-  # end
 
   def shippingaddresses_params
     params.require(:buy_shipping_address).permit(:postal_code, :prefectures_id, :municipality, :address, :phone_number).merge(
@@ -44,5 +38,9 @@ class BuysController < ApplicationController
       card: shippingaddresses_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_buy
+    @item = Item.find(params[:item_id])
   end
 end

@@ -2,14 +2,19 @@ require 'rails_helper'
 
 RSpec.describe BuyShippingAddress, type: :model do
   before do
-    # @user = FactoryBot.create(:item)
-    # @item = FactoryBot.create(:user)
-    @buy_shipping_address = FactoryBot.build(:buy_shipping_address)
+    @user = FactoryBot.create(:item)
+    @item = FactoryBot.create(:user)
+    @buy_shipping_address = FactoryBot.build(:buy_shipping_address, user_id: @user, item_id: @item)
+    sleep 0.1
   end
 
   describe '商品購入機能' do
     context '商品購入ががうまくいく時' do
       it 'ログイン状態の出品者以外のユーザーのみ、必要な情報を適切に入力すると、商品の購入ができること' do
+        expect(@buy_shipping_address).to be_valid
+      end
+      it '建物名がない場合でも購入できる' do
+        @buy_shipping_address.building_name = ''
         expect(@buy_shipping_address).to be_valid
       end
       context '上手くいかない時' do
@@ -52,6 +57,16 @@ RSpec.describe BuyShippingAddress, type: :model do
           @buy_shipping_address.phone_number = ''
           @buy_shipping_address.valid?
           expect(@buy_shipping_address.errors.full_messages).to include("Phone number can't be blank")
+        end
+        it 'user_idがない場合は購入できないこと' do
+          @buy_shipping_address.user_id = ''
+          @buy_shipping_address.valid?
+          expect(@buy_shipping_address.errors.full_messages).to include("User can't be blank")
+        end
+        it 'item_idがない場合は購入できないこと' do
+          @buy_shipping_address.item_id = ''
+          @buy_shipping_address.valid?
+          expect(@buy_shipping_address.errors.full_messages).to include("Item can't be blank")
         end
       end
     end
