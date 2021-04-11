@@ -5,9 +5,9 @@ FactoryBot.define do
     municipality { '札幌市北区' }
     address { '1-23' }
     phone_number { '09012345678' }
-    user_id { Faker::Number }
-    item_id { Faker::Number }
     token { 'abcdefg' }
     building_name { '山田ビル' }
+
+    association :buy
   end
 end

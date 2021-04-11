@@ -33,15 +33,20 @@ RSpec.describe BuyShippingAddress, type: :model do
           @buy_shipping_address.valid?
           expect(@buy_shipping_address.errors.full_messages).to include('Phone number is invalid')
         end
+        it '電話番号は英数字混合では登録出来ないこと' do
+          @buy_shipping_address.phone_number = '1a2b3c4d'
+          @buy_shipping_address.valid?
+          expect(@buy_shipping_address.errors.full_messages).to include('Phone number is invalid')
+        end
         it '配送先の情報として、郵便番号が必須であること' do
           @buy_shipping_address.postal_code = ''
           @buy_shipping_address.valid?
           expect(@buy_shipping_address.errors.full_messages).to include('Postal code is invalid')
         end
         it '配送先の情報として、都道府県が必須であること' do
-          @buy_shipping_address.prefectures_id = ''
+          @buy_shipping_address.prefectures_id = 1
           @buy_shipping_address.valid?
-          expect(@buy_shipping_address.errors.full_messages).to include("Prefectures can't be blank")
+          expect(@buy_shipping_address.errors.full_messages).to include("Prefectures must be other than 1")
         end
         it '配送先の情報として、市区町村が必須であること' do
           @buy_shipping_address.municipality = ''
