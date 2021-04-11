@@ -40,10 +40,7 @@ class BuysController < ApplicationController
   end
 
   def item_user
-    if current_user.id == @item.user.id
-      redirect_to root_path 
-    else 
-      @item.purchace.blank?
+      redirect_to root_path if current_user.id == @item.user.id || @item.purchace.blank?
     end
   end
 

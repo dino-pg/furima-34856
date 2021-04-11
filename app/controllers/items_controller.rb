@@ -53,10 +53,6 @@ class ItemsController < ApplicationController
 
   def buy_item
     @item = Buy.find(params[:item_id])
-    if current_user.id == @item.user.id
-      redirect_to root_path
-    else 
-      @item.purchace.blank?
+      redirect_to root_path if current_user.id == @item.user.id || @item.purchace.blank?
     end
-  end
 end
