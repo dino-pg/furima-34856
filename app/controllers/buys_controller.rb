@@ -40,9 +40,11 @@ class BuysController < ApplicationController
   end
 
   def item_user
-    @item = Buy.find(params[:item_id])
-    redirect_to root_path unless current_user.id == @item.user.id
+    if current_user.id == @item.user.id
+      redirect_to root_path 
+    else 
+      @item.purchace.blank?
+    end
   end
-end
 
 end
