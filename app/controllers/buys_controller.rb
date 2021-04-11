@@ -1,7 +1,6 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
   before_action :set_buy, only: [:index, :create]
-  before_action :redirect, only: [:index]
   before_action :item_user, only: [:index, :create]
 
   def index
@@ -40,13 +39,8 @@ class BuysController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def redirect
-    @item = Buy.find(params[:item_id])
-    redirect_to root_path
-  end
-
   def item_user
-     if current_user == @item.user
+     if current_user == @item.user || @item = Buy.find(params[:item_id])
     redirect_to root_path
   end
 end
